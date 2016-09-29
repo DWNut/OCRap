@@ -5,7 +5,7 @@
 ## Login   <dwnut@epita.fr>
 ## 
 ## Started on  Tue Sep 27 23:51:36 2016 Juliette Malassé
-## Last update Wed Sep 28 22:31:18 2016 Juliette Malassé
+## Last update Wed Sep 28 23:26:09 2016 Juliette Malassé
 ##
 
 CC	= @gcc
@@ -17,13 +17,14 @@ SRCDIR	= src
 INCDIR	= include
 OBJDIR	= obj
 
-CFLAGS	= -Wall -Wextra
+CFLAGS	= -Wall -Wextra -Wpadded
 CFLAGS += -std=c99 -ansi -pedantic
 CFLAGS += -I./$(INCDIR)
 
 NAME	= ocr
 
-SRCS	= main.c
+SRCS	= main.c		\
+	  BitmapReader.c
 
 OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
 
