@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	main(int argc, char *argv[])
+#include "NeuronalNerwork.h"
+#include "pixel_operations.h"
+
+int main(int argv, char *argc[])
 {
-  printf("Hello World !\n");
-  return EXIT_SUCCESS;
+  printf("CHAT");
+  return 0;
 }

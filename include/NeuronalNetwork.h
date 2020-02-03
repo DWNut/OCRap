@@ -1,0 +1,51 @@
+#ifndef NEURONAL_NETWORK_H_
+# define NEURONAL_NETWORK_H_
+
+typedef struct __attribute__((packed))
+{
+	/*Hyperparameters */
+	int                 _input;
+	int                 _output;
+	int                 _hidden;
+
+	//bias input-hidden layer from a and b
+	float                *bias_1a;
+	float                *bias_1b;
+	//bias hidden layer-output
+	float                *bias_2;
+
+	/*list of weights of synapses between
+	  input a and the hidden layer
+	 */
+	float               *weight_1a;
+
+	/*list of weights of synapses between
+	  input b and the hidden layer*/
+	float               *weight_1b;
+
+	/*list of weights of synapses between
+	  the hidden layer and the output*/
+	float               *weight_2;
+
+	/*list of hidden neurons for each case*/ 
+	float               *z1_00;
+	float               *z1_01;
+	float               *z1_10;
+	float               *z1_11;
+
+	/*list of output for each case */
+	float               *z2;
+
+}                     NeuralNetworkInit;
+
+//FUNCTIONS PROTOTYPES
+
+NeuralNetworkInit            *init_network(void);
+float                        *forward(NeuralNetworkInit *net);
+float                        *costFunction(float *output);
+float                        *deriv_w2(NeuralNetworkInit *net, float *output);
+float                        *deriv_b2(NeuralNetworkInit *net, float *output);
+float                        *deriv_w1(NeuralNetworkInit *net, float *output);
+float                        *deriv_b1(NeuralNetworkInit *net, float *output);
+
+#endif /* !NEURONAL_NETWORK_H_ */

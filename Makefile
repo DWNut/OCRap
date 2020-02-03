@@ -1,50 +1,17 @@
-##
-## Makefile for OCRap
-## 
-## Made by Juliette Malassé
-## Login   <dwnut@epita.fr>
-## 
-## Started on  Tue Sep 27 23:51:36 2016 Juliette Malassé
-## Last update Wed Sep 28 23:26:09 2016 Juliette Malassé
-##
+CC=gcc
 
-CC	= @gcc
-EC	= @echo
-MD	= @mkdir -p
-RM	= @rm -rv
+CPPFLAGS= `pkg-config --cflags sdl`
+CFLAGS= -Wall -Wextra -Werror -std=c99 -g
+LDFLAGS=
+LDLIBS= `pkg-config --libs sdl` -lSDL_image -lm
 
-SRCDIR	= src
-INCDIR	= include
-OBJDIR	= obj
+SRC=  detect_lines.c
+OBJ= ${SRC:.c=.o}
 
-CFLAGS	= -Wall -Wextra -Wpadded
-CFLAGS += -std=c99 -ansi -pedantic
-CFLAGS += -I./$(INCDIR)
+all: detect_lines
 
-NAME	= ocr
-
-SRCS	= main.c		\
-	  BitmapReader.c
-
-OBJS	= $(SRCS:%.c=$(OBJDIR)/%.o)
-
-all: $(NAME)
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(MD) $(OBJDIR)
-	$(EC) Compilation de $<...
-	$(CC) -o $@ -c $< $(CFLAGS)
-
-$(NAME): $(OBJS)
-	$(EC) Linking de $(NAME)...
-	$(CC) -o $(NAME) $(OBJS)
+main: ${OBJ}
 
 clean:
-	$(RM) $(OBJDIR)
-
-fclean: clean
-	$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re
+	rm -f *~ *.o
+	rm -f detect_lines
